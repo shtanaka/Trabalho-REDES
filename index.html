@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="TrabalhoRedes">
+	<head>
+		<meta charset="utf-8" >
+		<title> HTML Starter </title>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+		<script type="text/javascript" src="js/controllers.js"> </script>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+	<body>
+		<section ng-controller="formCtrl">
+			<form>
+				<div class="element-form">
+					<h3>Quantidade de usuários na rede:</h3>
+					<input ng-model="qtdeUsuarios" type="text"/>
+				</div>
+				<div class="element-form">
+				<h3>Existe algum servidor para colocar aplicações?:</h3>
+				<input ng-model="existsServer" value="yes" type="radio"/> Sim 
+				<input ng-model="existsServer" value="no" type="radio"/> Nao
+				</div>
+
+				<div ng-show="isShown('yes')">
+					<h3>Especifique as aplicações existentes: </h3>
+					<div ng-repeat="n in [] | range: {{ num }}">
+						aa
+					</div>
+
+				</div>
+    			
+
+			</form>
+		</section>
+	</body>
+</html>
