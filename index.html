@@ -8,37 +8,81 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 	<body>
+		<header>
+			<h1> Trabalho de redes </h1>
+		</header>
 		<section ng-controller="formCtrl">
 			<form>
+				
 				<div class="element-form">
 					<h3>Quantidade de usuários na rede:</h3>
 					<input ng-model="qtdeUsuarios" type="text"/>
 				</div>
-				<div class="element-form">
-				<h3>Existe algum servidor para colocar aplicações?</h3>
-				<input ng-model="existsServer" value="yes" type="radio"/> Sim 
-				<input ng-model="existsServer" value="no" type="radio"/> Nao
 				
-				<div ng-show="isShown('yes')" class="element-form">
-					<h3>Especifique as aplicações existentes: </h3>
-					<div ng-repeat="app in apps" >
-						<table>
-							<tr>
-								<td>nome da aplicação:</td><td><input ng-model="nothing" type="text"/></td>
-							</tr>
-							<tr>
-								<td>é acessada localmente?</td><td><input ng-model="nothing" type="checkbox"/></td>
-							</tr>
-							<tr>
-								<td>é acessada pela remotamente?</td><td><input ng-model="nothing" type="checkbox"/></td>
-							</tr>
-						</table>
+				<div class="element-form">
+					<h3>Existe algum servidor para colocar aplicações?</h3>
+					<input ng-model="existsServer" value="yes" type="radio"/> Sim 
+					<input ng-model="existsServer" value="no" type="radio"/> Nao
+					<div ng-show="isShownApp('yes')" class="element-form">
+						<h3>Especifique as aplicações existentes: </h3>
+						<div ng-repeat="app in apps" >
+							<table>
+								<tr>
+									<td>nome da aplicação:</td><td><input ng-model="nothing" type="text"/></td>
+								</tr>
+								<tr>
+									<td>é acessada localmente?</td><td><input ng-model="nothing" type="checkbox"/></td>
+								</tr>
+								<tr>
+									<td>é acessada remotamente?</td><td><input ng-model="nothing" type="checkbox"/></td>
+								</tr>
+							</table>
+						</div>
+						<button ng-click="addApp()"> adicionar aplicação </button>
+						<button ng-click="popApp()"> remover aplicação </button>
 					</div>
-					<button ng-click="add()"> adicionar aplicação </button>
-					<button ng-click="pop()"> remover aplicação </button>
-				</div>
     			</div>
 
+    			<div class="element-form">
+					<h3>A sua rede fornecerá limitação de conexão a algum grupo de usuários??</h3>
+					<input ng-model="enableConnection" value="yes" type="radio"/> Sim 
+					<input ng-model="enableConnection" value="no" type="radio"/> Nao
+					<div ng-show="isShownConnectivity('yes')" class="element-form">
+						<h3>Defina esses grupos: </h3>
+						<div ng-repeat="app in apps" >
+							<table>
+								<tr>
+									<td>nome do grupo:</td>
+									<td><input ng-model="nothing" type="text"/></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>quantidade de participantes</td>
+									<td><input ng-model="nothing" type="text"/></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>acessa a internet?</td>
+									<td><input ng-model="nothing" type="checkbox"/></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>acessa quais dessas aplicações?</td>
+									<td>
+										<select>
+										    <option value="volvo">Volvo</option>
+										</select>
+									</td>
+									<td><button> aa </button></td>
+								</tr>
+							</table>
+						</div>
+						<button ng-click="add()"> adicionar aplicação </button>
+						<button ng-click="pop()"> remover aplicação </button>
+					</div>
+    			</div>
+
+    			
 
 			</form>
 		</section>
