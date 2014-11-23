@@ -6,17 +6,19 @@ app.controller('formCtrl', function($scope) {
         return existsServer === $scope.existsServer;
     };
 
-    $scope.num = 10;
+    
+    $scope.apps = [{name: '', accessNetwork: '', acessInternet: ''}];
+    
+    $scope.add = function() {
+    	$scope.apps.push({name: '', accessNetwork: '', acessInternet: ''});
+    }
+    $scope.pop = function() {
+    	$scope.apps.pop({name: '', accessNetwork: '', acessInternet: ''});
+    }
+
+
 
 })
 
-app.filter('range', function() {
-  return function(input, total) {
-    total = parseInt(total);
-    for (var i=0; i<total; i++)
-      input.push(i);
-    return input;
-  };
-})
 
 ;

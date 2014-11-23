@@ -15,19 +15,30 @@
 					<input ng-model="qtdeUsuarios" type="text"/>
 				</div>
 				<div class="element-form">
-				<h3>Existe algum servidor para colocar aplicações?:</h3>
+				<h3>Existe algum servidor para colocar aplicações?</h3>
 				<input ng-model="existsServer" value="yes" type="radio"/> Sim 
 				<input ng-model="existsServer" value="no" type="radio"/> Nao
-				</div>
-
-				<div ng-show="isShown('yes')">
+				
+				<div ng-show="isShown('yes')" class="element-form">
 					<h3>Especifique as aplicações existentes: </h3>
-					<div ng-repeat="n in [] | range: {{ num }}">
-						aa
+					<div ng-repeat="app in apps" >
+						<table>
+							<tr>
+								<td>nome da aplicação:</td><td><input ng-model="nothing" type="text"/></td>
+							</tr>
+							<tr>
+								<td>é acessada localmente?</td><td><input ng-model="nothing" type="checkbox"/></td>
+							</tr>
+							<tr>
+								<td>é acessada pela remotamente?</td><td><input ng-model="nothing" type="checkbox"/></td>
+							</tr>
+						</table>
 					</div>
-
+					<button ng-click="add()"> adicionar aplicação </button>
+					<button ng-click="pop()"> remover aplicação </button>
 				</div>
-    			
+    			</div>
+
 
 			</form>
 		</section>
