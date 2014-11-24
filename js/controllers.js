@@ -12,27 +12,41 @@ app.controller('formCtrl', function($scope) {
     };
 
    	$scope.apps = [];
+   	$scope.nameApp = '';
+   	$scope.networkApp = false;
+   	$scope.remoteApp = false;
 
    	$scope.addApp = function() {
-   		$scope.apps.push({name: 'aa', accessNetwork:'bb', accessRemote: 'cc'});
+   		$scope.apps.push({name: $scope.nameApp,
+   						  accessNetwork: $scope.networkApp,
+   						  accessRemote: $scope.remoteApp});
    	}
     
-    $scope.vlans = [{name: '', numberOfUsers: 0, internetConnection: false, appConnection: []}];
-    
+   	$scope.removeApp = function(app) {
+   		index = $scope.apps.indexOf(app);
+   		$scope.apps.splice(index, 1);
+   	}
 
+    $scope.vlans = [];
+    $scope.nameVlan = '';
+    $scope.numberOfUsersVlan = 0;
+    $scope.internetConnectionVlan = false;
+    $scope.appConnectionVlan = [];
+    $scope.appConnectionVlanSelected = '';
 
     $scope.addVlan = function() {
-    	$scope.vlans.push({name: '', numberOfUsers: 0, internetConnection: false, appConnection: []});
+    	$scope.vlans.push({	name: $scope.nameVlan,
+    						numberOfUsers: $scope.numberOfUsersVlan,
+    						internetConnection: $scope.internetConnectionVlan,
+    						appConnection: $scope.appConnectionVlan});
     }
-    $scope.popVlan = function() {
-    	if($scope.vlans.length > 1) {
-    		$scope.vlans.pop();
-   		} else {
-   			alert("Impossível remover");
-   		}
+    $scope.removeVlan = function(vlan) {
+    	index = $scope.vlans.indexOf(vlan);
+    	$scope.vlans.splice(index, 1);
     }
 
-
-    
+    $scope.appConnectionVlanAdd = function() {
+    	 $scope.appConnectionVlan.push(appConnectionVlanSelected);
+    }
 
 });

@@ -31,7 +31,7 @@
 							
 							<div ng-repeat="app in apps">
 								
-									{{ app.name }} {{ app.accessNetwork }} {{ app.accessRemote }}
+									{{ app.name }} {{ app.accessNetwork }} {{ app.accessRemote }} <a href="#" ng-click="removeApp(app)" > remover</a>
 
 							</div>
 						</table>
@@ -65,37 +65,42 @@
 					<input ng-model="enableConnection" value="no" type="radio"/> Nao
 					<div ng-show="isShownConnectivity('yes')" class="element-form">
 						<h3>Defina esses grupos: </h3>
+							Adicionados:
 						<div ng-repeat="vlan in vlans" >
-							<table>
-								<tr>
-									<td>nome do grupo:</td>
-									<td><input type="text"/></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>quantidade de participantes</td>
-									<td><input type="text"/></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>acessa a internet?</td>
-									<td><input type="checkbox"/></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>acessa quais dessas aplicações?*</td>
-									<td>
-										<select ng-repeat="app in apps">
-										    <option value="{{ app.name }}">{{ app.name }}</option>
-										</select>
-									</td>
-									<td><button> aa </button></td>
-								</tr>
-							</table>
-
+							{{vlan.name}} {{vlan.numberOfUsers}} {{vlan.internetConnection}} {{vlan.appConnection}}
+							<a href="#" ng-click="removeVlan(vlan)"> remover </a>
 						</div>
+						<table>
+							<tr>
+								<td>nome do grupo:</td>
+								<td><input type="text" ng-model="nameVlan"/></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>quantidade de participantes:</td>
+								<td><input type="text" ng-model="numberOfUsersVlan"/></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>acessa a internet?</td>
+								<td><input type="checkbox" ng-model="internetConnectionVlan"/></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>acessa quais dessas aplicações?*</td>
+								<td>
+									<select ng-model="appConnectionVlanSelected">
+										<
+									    <option ng-repeat="app in apps" value="{{ app.name }}" >{{ app.name }}</option>
+									</select>
+								</td>
+								<td><button ng-click="appConnectionVlanAdd()"> add </button></td>
+							</tr>
+						</table>
+
+						
 						<button ng-click="addVlan()"> adicionar grupo </button>
-						<button ng-click="popVlan()"> remover grupo </button>
+						
 						<br />
 						<br />
 						*para que apareçam as aplicações, adicione-as em cima!
