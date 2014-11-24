@@ -25,21 +25,37 @@
 					<input ng-model="existsServer" value="no" type="radio"/> Nao
 					<div ng-show="isShownApp('yes')" class="element-form">
 						<h3>Especifique as aplicações existentes: </h3>
-						<div ng-repeat="app in apps" >
+						Adicionadas:
+
+						
+							
+							<div ng-repeat="app in apps">
+								
+									{{ app.name }} {{ app.accessNetwork }} {{ app.accessRemote }}
+
+							</div>
+						</table>
+						<div class="element-form">
 							<table>
 								<tr>
-									<td>nome da aplicação:</td><td><input ng-model="nothing" type="text"/></td>
+									<td>nome da aplicação:</td>
+									<td><input type="text" ng-model="nameApp"/></td>
 								</tr>
 								<tr>
-									<td>é acessada localmente?</td><td><input ng-model="nothing" type="checkbox"/></td>
+									<td>é acessada localmente?</td>
+									<td><input type="checkbox" ng-model="networkApp"/></td>
 								</tr>
 								<tr>
-									<td>é acessada remotamente?</td><td><input ng-model="nothing" type="checkbox"/></td>
+									<td>é acessada remotamente?</td>
+									<td><input type="checkbox" ng-model="remoteApp"/></td>
 								</tr>
+								
 							</table>
+							<button ng-click="addApp()"> adicionar </button>
 						</div>
-						<button ng-click="addApp()"> adicionar aplicação </button>
-						<button ng-click="popApp()"> remover aplicação </button>
+						<br />
+						<br />
+						
 					</div>
     			</div>
 
@@ -49,36 +65,40 @@
 					<input ng-model="enableConnection" value="no" type="radio"/> Nao
 					<div ng-show="isShownConnectivity('yes')" class="element-form">
 						<h3>Defina esses grupos: </h3>
-						<div ng-repeat="app in apps" >
+						<div ng-repeat="vlan in vlans" >
 							<table>
 								<tr>
 									<td>nome do grupo:</td>
-									<td><input ng-model="nothing" type="text"/></td>
+									<td><input type="text"/></td>
 									<td></td>
 								</tr>
 								<tr>
 									<td>quantidade de participantes</td>
-									<td><input ng-model="nothing" type="text"/></td>
+									<td><input type="text"/></td>
 									<td></td>
 								</tr>
 								<tr>
 									<td>acessa a internet?</td>
-									<td><input ng-model="nothing" type="checkbox"/></td>
+									<td><input type="checkbox"/></td>
 									<td></td>
 								</tr>
 								<tr>
-									<td>acessa quais dessas aplicações?</td>
+									<td>acessa quais dessas aplicações?*</td>
 									<td>
-										<select>
-										    <option value="volvo">Volvo</option>
+										<select ng-repeat="app in apps">
+										    <option value="{{ app.name }}">{{ app.name }}</option>
 										</select>
 									</td>
 									<td><button> aa </button></td>
 								</tr>
 							</table>
+
 						</div>
-						<button ng-click="add()"> adicionar aplicação </button>
-						<button ng-click="pop()"> remover aplicação </button>
+						<button ng-click="addVlan()"> adicionar grupo </button>
+						<button ng-click="popVlan()"> remover grupo </button>
+						<br />
+						<br />
+						*para que apareçam as aplicações, adicione-as em cima!
 					</div>
     			</div>
 

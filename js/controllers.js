@@ -11,23 +11,28 @@ app.controller('formCtrl', function($scope) {
         return enableConnection === $scope.enableConnection;
     };
 
-    
-    $scope.apps = [{name: '', accessNetwork: '', acessInternet: ''}];
-    
-    $scope.addApp = function() {
-    	$scope.apps.push({name: '', accessNetwork: '', acessInternet: ''});
-    }
-    $scope.popApp = function() {
-    	$scope.apps.pop();
-    }
+   	$scope.apps = [];
 
+   	$scope.addApp = function() {
+   		$scope.apps.push({name: 'aa', accessNetwork:'bb', accessRemote: 'cc'});
+   	}
+    
     $scope.vlans = [{name: '', numberOfUsers: 0, internetConnection: false, appConnection: []}];
     
-    $scope.addApp = function() {
-    	$scope.apps.push({name: '', numberOfUsers: 0, internetConnection: false, appConnection: []});
+
+
+    $scope.addVlan = function() {
+    	$scope.vlans.push({name: '', numberOfUsers: 0, internetConnection: false, appConnection: []});
     }
-    $scope.popApp = function() {
-    	$scope.apps.pop();
+    $scope.popVlan = function() {
+    	if($scope.vlans.length > 1) {
+    		$scope.vlans.pop();
+   		} else {
+   			alert("Impossível remover");
+   		}
     }
+
+
+    
 
 });
