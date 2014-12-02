@@ -12,7 +12,7 @@
 			<h1> Trabalho de redes </h1>
 		</header>
 		<section ng-controller="formCtrl">
-			<form>
+			<form ng-show="!teste">
 				
 				<div class="element-form">
 					<h3>Quantidade de usuários na rede:</h3>
@@ -90,14 +90,16 @@
 								<td>acessa quais dessas aplicações?*</td>
 								<td>
 									<select ng-model="appConnectionVlanSelected">
-										<
-									    <option ng-repeat="app in apps" value="{{ app.name }}" >{{ app.name }}</option>
+									    <option ng-repeat="app in apps" value="{{ app }}"  >{{ app.name }}</option>
 									</select>
 								</td>
 								<td><button ng-click="appConnectionVlanAdd()"> add </button></td>
 							</tr>
 						</table>
 
+						<div ng-repeat="app in appConnectionVlan">
+							{{ app.name }}
+						</div>
 						
 						<button ng-click="addVlan()"> adicionar grupo </button>
 						
@@ -107,9 +109,27 @@
 					</div>
     			</div>
 
-    			
+    			<button ng-click="submit()"> Enviar </button>
+
+
 
 			</form>
+			<div ng-show="teste">
+			<h2> Sobre a rede: </h2>
+			<h3>Numero de dominios de Broadcast : {{ vlans.length }}</h3>
+
+				<div ng-repeat="vlan in vlans" >
+
+					Vlan : {{ vlan.name }}<br />
+					Num de dominios de colisão da vlan : {{ vlan.numberOfUsers + 2 }} <br />
+					Acesso a internet : {{ vlan.internetConnection }} <br />
+					Conecta-se aos apps : <br />
+					<div ng-repeat="app in vlan.appConnection">
+						{{ app.name }}
+					</div>
+				</div>
+			</div>
 		</section>
+		
 	</body>
 </html>

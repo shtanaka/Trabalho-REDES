@@ -2,9 +2,12 @@ var app = angular.module('TrabalhoRedes', []);
 
 app.controller('formCtrl', function($scope) {
     $scope.existsServer = 'no';
+    $scope.teste = 0;
     $scope.isShownApp = function(existsServer) {
         return existsServer === $scope.existsServer;
     };
+
+
 
     $scope.enableConnection = 'no';
     $scope.isShownConnectivity = function(enableConnection) {
@@ -36,9 +39,12 @@ app.controller('formCtrl', function($scope) {
 
     $scope.addVlan = function() {
     	$scope.vlans.push({	name: $scope.nameVlan,
-    						numberOfUsers: $scope.numberOfUsersVlan,
+    						numberOfUsers: parseInt($scope.numberOfUsersVlan),
     						internetConnection: $scope.internetConnectionVlan,
     						appConnection: $scope.appConnectionVlan});
+      $scope.appConnectionVlan = [];
+    
+
     }
     $scope.removeVlan = function(vlan) {
     	index = $scope.vlans.indexOf(vlan);
@@ -46,7 +52,18 @@ app.controller('formCtrl', function($scope) {
     }
 
     $scope.appConnectionVlanAdd = function() {
-    	 $scope.appConnectionVlan.push(appConnectionVlanSelected);
+    	 $scope.appConnectionVlan.push($scope.appConnectionVlanSelected);
     }
+
+    $scope.submitted = 'no';
+
+    $scope.submit = function() {
+      $scope.teste = 1;
+    }
+
+    $scope.isSubmitted = function(submitted) {
+      return submitted === $scope.submitted;
+    }
+
 
 });
