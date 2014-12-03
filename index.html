@@ -14,10 +14,7 @@
 		<section ng-controller="formCtrl">
 			<form ng-show="!teste">
 				
-				<div class="element-form">
-					<h3>Quantidade de usuários na rede:</h3>
-					<input ng-model="qtdeUsuarios" type="text"/>
-				</div>
+				
 				
 				<div class="element-form">
 					<h3>Existe algum servidor para colocar aplicações?</h3>
@@ -31,7 +28,7 @@
 							
 							<div ng-repeat="app in apps">
 								
-									{{ app.name }} {{ app.accessNetwork }} {{ app.accessRemote }} <a href="#" ng-click="removeApp(app)" > remover</a>
+									 {{ app.name }} {{ app.accessNetwork }} {{ app.accessRemote }} <a href="#" ng-click="removeApp(app)" > remover</a>
 
 							</div>
 						</table>
@@ -59,6 +56,11 @@
 					</div>
     			</div>
 
+				<div class="element-form">
+					<h3> A divisão dos grupos de acesso é feita por andares? </h3>
+					<input ng-model="floor" value="Haverá um switch por andar e um principal para acesso remoto. cabeamento de fibra entre andares e RJ45 para conexão local do andar" type="radio"/> Sim 
+					<input ng-model="floor" value="Haverá um switch para todos os usuários internos. Cabeamento RJ45 para conexão local do andar" type="radio"/> Nao
+				</div>
     			<div class="element-form">
 					<h3>A sua rede fornecerá limitação de conexão a algum grupo de usuários??</h3>
 					<input ng-model="enableConnection" value="yes" type="radio"/> Sim 
@@ -90,17 +92,17 @@
 								<td>acessa quais dessas aplicações?*</td>
 								<td>
 									<select ng-model="appConnectionVlanSelected">
-									    <option ng-repeat="app in apps" value="{{ app }}"  >{{ app.name }}</option>
+									    <option ng-repeat="app in localApps" value="{{ app }}"  >{{ app }}</option>
 									</select>
 								</td>
 								<td><button ng-click="appConnectionVlanAdd()"> add </button></td>
 							</tr>
 						</table>
 
-						<div ng-repeat="app in appConnectionVlan">
-							{{ app.name }}
-						</div>
 						
+						
+
+
 						<button ng-click="addVlan()"> adicionar grupo </button>
 						
 						<br />
@@ -115,19 +117,45 @@
 
 			</form>
 			<div ng-show="teste">
-			<h2> Sobre a rede: </h2>
-			<h3>Numero de dominios de Broadcast : {{ vlans.length }}</h3>
+				<h1> Sobre a rede: </h1>
 
-				<div ng-repeat="vlan in vlans" >
+				<h3> Estrutura da rede </h3>
+				{{ floor }}
 
-					Vlan : {{ vlan.name }}<br />
-					Num de dominios de colisão da vlan : {{ vlan.numberOfUsers + 2 }} <br />
-					Acesso a internet : {{ vlan.internetConnection }} <br />
-					Conecta-se aos apps : <br />
-					<div ng-repeat="app in vlan.appConnection">
-						{{ app.name }}
-					</div>
+
+				<h3> Aplicações que acessam o switch da WEB </h3>
+				<div ng-repeat="app in remoteApps" >
+					{{ app }}
+					<br />
 				</div>
+
+				<br />
+
+				<h3> Aplicações que acessam o switch local </h3>
+				<div ng-repeat="app in localApps" >
+					{{ app }}
+					<br />
+				</div>
+				
+
+				<h3>Numero de dominios de Broadcast : {{ vlans.length }}</h3>
+
+				<div ng-repeat="vlan in vlans" class="element-form">
+					<h5>Vlan :</h5> {{ vlan.name }}
+					<h5>Num de dominios de colisão da vlan :</h5> {{ vlan.numberOfUsers }} 
+					<h5>Acesso a internet :</h5> {{ vlan.internetConnection }} 
+					<h5>Conecta-se aos apps :</h5> 
+					<div ng-repeat="app in vlan.appConnection">
+						{{app}}
+					</div>
+						<h5>Mascara de subrede recomendada:</h5> {{ vlan.mask }}
+					<br />
+					<br />
+				</div>
+				
+
+
+
 			</div>
 		</section>
 		
